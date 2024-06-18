@@ -1,5 +1,5 @@
-%global commit0 404740a2ff102cf3f5e0ac56de07503048fc5742
-%global date 20240605
+%global commit0 bef7b046bf2ad76fb71afce887b091c5fd8a6b38
+%global date 20240618
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global debug_package %{nil}
@@ -7,13 +7,13 @@
 
 Name:       dkms-%{dkms_name}
 Version:    0
-Release:    3.%{date}git%{shortcommit0}%{?dist}
+Release:    4.%{date}git%{shortcommit0}%{?dist}
 Summary:    Kernel drivers for the IPU 6 and sensors
 License:    GPLv3
 URL:        https://github.com/intel/ipu6-drivers
 BuildArch:  noarch
 
-Source0:    %{url}/archive/%{commit0}.tar.gz#/ipu6-drivers-%{shortcommit0}.tar.gz
+Source0:    https://github.com/jwrdegoede/ipu6-drivers/archive/%{commit0}.tar.gz#/ipu6-drivers-%{shortcommit0}.tar.gz
 Source1:    dkms-no-weak-modules.conf
 Patch0:     https://patch-diff.githubusercontent.com/raw/intel/ipu6-drivers/pull/214.patch
 Patch1:     %{name}-conf.patch
@@ -58,6 +58,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Tue Jun 18 2024 Simone Caronni <negativo17@gmail.com> - 0-4.20240618gitbef7b04
+- Switch to jwrdegoede's fork for contributions.
+
 * Wed Jun 05 2024 Simone Caronni <negativo17@gmail.com> - 0-3.20240605git404740a
 - Update to latest snapshot.
 
