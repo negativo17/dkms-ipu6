@@ -1,74 +1,79 @@
-diff -Naur ipu6-drivers-71e0c690292586fc92d4b92b35a40e3ef6a87641.old/dkms.conf ipu6-drivers-71e0c690292586fc92d4b92b35a40e3ef6a87641/dkms.conf
---- ipu6-drivers-71e0c690292586fc92d4b92b35a40e3ef6a87641.old/dkms.conf	2024-05-06 13:20:53.832570173 +0200
-+++ ipu6-drivers-71e0c690292586fc92d4b92b35a40e3ef6a87641/dkms.conf	2024-05-06 13:21:17.968644737 +0200
-@@ -1,5 +1,5 @@
- PACKAGE_NAME=ipu6-drivers
--PACKAGE_VERSION=0.0.0
-+PACKAGE_VERSION=0
+diff -Naur ipu6-drivers-c6f2924c47e68837404cc7c09f0d75bc2581b87e.old/dkms.conf ipu6-drivers-c6f2924c47e68837404cc7c09f0d75bc2581b87e/dkms.conf
+--- ipu6-drivers-c6f2924c47e68837404cc7c09f0d75bc2581b87e.old/dkms.conf	2024-10-27 21:39:28.101480200 +0100
++++ ipu6-drivers-c6f2924c47e68837404cc7c09f0d75bc2581b87e/dkms.conf	2024-10-27 21:39:44.061572947 +0100
+@@ -38,47 +38,47 @@
  
- MAKE="make KERNELRELEASE=$kernelver KERNEL_SRC=$kernel_source_dir"
- CLEAN="make KERNELRELEASE=$kernelver KERNEL_SRC=$kernel_source_dir clean"
-@@ -35,83 +35,83 @@
- 
- BUILT_MODULE_NAME[0]="intel-ipu6"
- BUILT_MODULE_LOCATION[0]="drivers/media/pci/intel/ipu6"
+ BUILT_MODULE_NAME[0]="hm11b1"
+ BUILT_MODULE_LOCATION[0]="drivers/media/i2c"
 -DEST_MODULE_LOCATION[0]="/updates"
 +DEST_MODULE_LOCATION[0]="/extra"
  
- BUILT_MODULE_NAME[1]="intel-ipu6-isys"
- BUILT_MODULE_LOCATION[1]="drivers/media/pci/intel/ipu6"
+ BUILT_MODULE_NAME[1]="ov01a1s"
+ BUILT_MODULE_LOCATION[1]="drivers/media/i2c"
 -DEST_MODULE_LOCATION[1]="/updates"
 +DEST_MODULE_LOCATION[1]="/extra"
  
- BUILT_MODULE_NAME[2]="intel-ipu6-psys"
- BUILT_MODULE_LOCATION[2]="drivers/media/pci/intel/ipu6"
+ BUILT_MODULE_NAME[2]="ov01a10"
+ BUILT_MODULE_LOCATION[2]="drivers/media/i2c"
 -DEST_MODULE_LOCATION[2]="/updates"
 +DEST_MODULE_LOCATION[2]="/extra"
  
- BUILT_MODULE_NAME[3]="hm11b1"
+ BUILT_MODULE_NAME[3]="ov02c10"
  BUILT_MODULE_LOCATION[3]="drivers/media/i2c"
 -DEST_MODULE_LOCATION[3]="/updates"
 +DEST_MODULE_LOCATION[3]="/extra"
  
- BUILT_MODULE_NAME[4]="ov01a1s"
+ BUILT_MODULE_NAME[4]="ov02e10"
  BUILT_MODULE_LOCATION[4]="drivers/media/i2c"
 -DEST_MODULE_LOCATION[4]="/updates"
 +DEST_MODULE_LOCATION[4]="/extra"
  
- BUILT_MODULE_NAME[5]="ov01a10"
+ BUILT_MODULE_NAME[5]="hm2170"
  BUILT_MODULE_LOCATION[5]="drivers/media/i2c"
 -DEST_MODULE_LOCATION[5]="/updates"
 +DEST_MODULE_LOCATION[5]="/extra"
  
- BUILT_MODULE_NAME[6]="ov02c10"
+ BUILT_MODULE_NAME[6]="hm2172"
  BUILT_MODULE_LOCATION[6]="drivers/media/i2c"
 -DEST_MODULE_LOCATION[6]="/updates"
 +DEST_MODULE_LOCATION[6]="/extra"
  
- BUILT_MODULE_NAME[7]="ov02e10"
+ BUILT_MODULE_NAME[7]="hi556"
  BUILT_MODULE_LOCATION[7]="drivers/media/i2c"
 -DEST_MODULE_LOCATION[7]="/updates"
 +DEST_MODULE_LOCATION[7]="/extra"
  
- BUILT_MODULE_NAME[8]="hm2170"
- BUILT_MODULE_LOCATION[8]="drivers/media/i2c"
--DEST_MODULE_LOCATION[8]="/updates"
-+DEST_MODULE_LOCATION[8]="/extra"
+ if ! version_lt ${KERNEL_VERSION} ${KV_OV05C10}; then
+     BUILD_EXCLUSIVE_CONFIG="CONFIG_VIDEO_V4L2_I2C CONFIG_V4L2_CCI_I2C"
+     BUILT_MODULE_NAME[8]="ov05c10"
+     BUILT_MODULE_LOCATION[8]="drivers/media/i2c"
+-    DEST_MODULE_LOCATION[8]="/updates"
++    DEST_MODULE_LOCATION[8]="/extra"
+ fi
  
- BUILT_MODULE_NAME[9]="hm2172"
- BUILT_MODULE_LOCATION[9]="drivers/media/i2c"
+ if version_lt ${KERNEL_VERSION} ${KV_OV2740}; then
+     BUILT_MODULE_NAME[8]="ov2740"
+     BUILT_MODULE_LOCATION[8]="drivers/media/i2c"
+-    DEST_MODULE_LOCATION[8]="/updates"
++    DEST_MODULE_LOCATION[8]="/extra"
+ fi
+ 
+ if ! version_lt ${KERNEL_VERSION} ${KV_IPU6_ISYS}; then
+@@ -87,46 +87,46 @@
+ 
+ BUILT_MODULE_NAME[9]="intel-ipu6-psys"
+ BUILT_MODULE_LOCATION[9]="drivers/media/pci/intel/ipu6/psys"
 -DEST_MODULE_LOCATION[9]="/updates"
 +DEST_MODULE_LOCATION[9]="/extra"
  
- BUILT_MODULE_NAME[10]="hi556"
- BUILT_MODULE_LOCATION[10]="drivers/media/i2c"
--DEST_MODULE_LOCATION[10]="/updates"
-+DEST_MODULE_LOCATION[10]="/extra"
+ if version_lt ${KERNEL_VERSION} ${KV_IPU6_ISYS}; then
+     BUILT_MODULE_NAME[10]="intel-ipu6"
+     BUILT_MODULE_LOCATION[10]="drivers/media/pci/intel/ipu6"
+-    DEST_MODULE_LOCATION[10]="/updates"
++    DEST_MODULE_LOCATION[10]="/extra"
  
- 
- if version_lt ${KERNEL_VERSION} ${KV_OV2740}; then
-     BUILT_MODULE_NAME[11]="ov2740"
-     BUILT_MODULE_LOCATION[11]="drivers/media/i2c"
+     BUILT_MODULE_NAME[11]="intel-ipu6-isys"
+     BUILT_MODULE_LOCATION[11]="drivers/media/pci/intel/ipu6"
 -    DEST_MODULE_LOCATION[11]="/updates"
 +    DEST_MODULE_LOCATION[11]="/extra"
  fi
