@@ -1,21 +1,21 @@
-%global commit0 19c1deddd2274016ed0b8b5eed804bb1e2f6fee7
-%global date 20241030
+%global commit0 f2a1b54afd8537f52f17adcadd7d3e064cf704a3
+%global date 20250119
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 %global debug_package %{nil}
 %global dkms_name ipu6
 
 Name:       dkms-%{dkms_name}
-Version:    0
-Release:    6.%{date}git%{shortcommit0}%{?dist}
+Version:    0.0^%{date}git%{shortcommit0}
+Release:    1%{?dist}
 Summary:    Kernel drivers for the IPU 6 and sensors
 License:    GPLv3
-URL:        https://github.com/intel/ipu6-drivers
+URL:        https://github.com/jwrdegoede/ipu6-drivers
 BuildArch:  noarch
 
 Source0:    %{url}/archive/%{commit0}.tar.gz#/ipu6-drivers-%{shortcommit0}.tar.gz
 Source1:    dkms-no-weak-modules.conf
-Patch0:     %{name}-conf.patch
+Source2:    %{name}.conf
 
 Provides:   %{dkms_name}-kmod = %{version}
 Requires:   %{dkms_name}-kmod-common = %{version}
@@ -27,6 +27,7 @@ IPU6 on Intel Tiger Lake, Alder Lake, Raptor Lake and Meteor Lake platforms.
 
 %prep
 %autosetup -p1 -n ipu6-drivers-%{commit0}
+cp %{SOURCE2} dkms.conf
 
 %build
 
@@ -57,6 +58,10 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Tue Jan 21 2025 Simone Caronni <negativo17@gmail.com> - 0.0^20250119gitf2a1b54-1
+- Use recent packaging guidelines for snapshots.
+- Switch again to jwrdegoede's fork.
+
 * Mon Nov 11 2024 Simone Caronni <negativo17@gmail.com> - 0-6.20241030git19c1ded
 - Update to latest snapshot.
 
