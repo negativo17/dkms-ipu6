@@ -1,5 +1,5 @@
-%global date 20250205
-%global commit0 032c59cf6ca1399525792c1884d37142742703ff
+%global date 20250215
+%global commit0 40f52831a1bd234961b989d921113bb7603233b2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global commit1 0eae85556558b410635ad03ed5eccb9648e11fce
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
@@ -9,7 +9,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    0.0^%{date}git%{shortcommit0}
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    Kernel drivers for the IPU 6 and sensors
 License:    GPLv3
 URL:        https://github.com/jwrdegoede/ipu6-drivers
@@ -55,6 +55,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Sat Feb 15 2025 Simone Caronni <negativo17@gmail.com> - 0.0^20250215git40f5283-3
+- Update to latest snapshot.
+
 * Fri Feb 07 2025 Simone Caronni <negativo17@gmail.com> - 0.0^20250205git032c59c-2
 - Update to latest snapshot.
 - Simplify DKMS configuration.
