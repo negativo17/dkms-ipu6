@@ -1,22 +1,19 @@
-%global date 20250215
-%global commit0 40f52831a1bd234961b989d921113bb7603233b2
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global commit1 0eae85556558b410635ad03ed5eccb9648e11fce
-%global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
+%global date 20250508
+%global commit 1a884d5124dc149af4a645aa1493873bf796d677
+%global shortcommit %{sub %{commit} 1 7}
 
 %global debug_package %{nil}
 %global dkms_name ipu6
 
 Name:       dkms-%{dkms_name}
-Version:    0.0^%{date}git%{shortcommit0}
-Release:    3%{?dist}
+Version:    0.1~%{date}git%{shortcommit}
+Release:    4%{?dist}
 Summary:    Kernel drivers for the IPU 6 and sensors
 License:    GPLv3
-URL:        https://github.com/jwrdegoede/ipu6-drivers
+URL:        https://github.com/intel/ipu6-drivers
 BuildArch:  noarch
 
-Source0:    %{url}/archive/%{commit0}.tar.gz#/ipu6-drivers-%{shortcommit0}.tar.gz
-Source1:    https://github.com/jwrdegoede/usbio-drivers/archive/%{commit1}.tar.gz#/usbio-drivers-%{shortcommit1}.tar.gz
+Source0:    %{url}/archive/%{commit}.tar.gz#/ipu6-drivers-%{shortcommit}.tar.gz
 Source2:    %{name}.conf
 
 Provides:   %{dkms_name}-kmod = %{version}
@@ -24,15 +21,15 @@ Requires:   dkms
 
 %description
 Kernel drivers for the IPU 6 and sensors. It supports MIPI cameras through the
-IPU6 on Intel Tiger Lake, Alder Lake, Raptor Lake and Meteor Lake platforms.
+IPU6 on Intel platforms.
 
 %prep
-%autosetup -p1 -n ipu6-drivers-%{commit0} -a 1
-cp -fr usbio-drivers*/{drivers,include} .
+%autosetup -p1 -n ipu6-drivers-%{commit}
+# Pre-apply patch listed in dkms.conf:
 patch -p1 -i patches/*.patch
-cp %{SOURCE2} dkms.conf
+rm -fr patch* .github
 
-rm -fr usbio-drivers* patch*
+cp -f %{SOURCE2} dkms.conf
 
 %build
 
@@ -55,6 +52,11 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Tue May 13 2025 Simone Caronni <negativo17@gmail.com> - 0.1~20250508git1a884d5-4
+- Switch again to intel tree, now that is up to date.
+- Do not bunlde usbio-drivers.
+- Patch original dkms.conf file and pre-apply patch.
+
 * Sat Feb 15 2025 Simone Caronni <negativo17@gmail.com> - 0.0^20250215git40f5283-3
 - Update to latest snapshot.
 
