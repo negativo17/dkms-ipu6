@@ -1,5 +1,5 @@
-%global date 20250508
-%global commit 1a884d5124dc149af4a645aa1493873bf796d677
+%global date 20250627
+%global commit 9bff73689ea2502f6e3bc34769fd699cde3ffeea
 %global shortcommit %{sub %{commit} 1 7}
 
 %global debug_package %{nil}
@@ -7,7 +7,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    0.1~%{date}git%{shortcommit}
-Release:    4%{?dist}
+Release:    5%{?dist}
 Summary:    Kernel drivers for the IPU 6 and sensors
 License:    GPLv3
 URL:        https://github.com/intel/ipu6-drivers
@@ -52,6 +52,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Fri Jun 27 2025 Simone Caronni <negativo17@gmail.com> - 0.1~20250627git9bff736-5
+- Update to latest snapshot.
+
 * Tue May 13 2025 Simone Caronni <negativo17@gmail.com> - 0.1~20250508git1a884d5-4
 - Switch again to intel tree, now that is up to date.
 - Do not bunlde usbio-drivers.
