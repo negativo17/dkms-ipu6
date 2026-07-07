@@ -7,7 +7,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    0^%{date}git%{shortcommit}
-Release:    8%{?dist}
+Release:    9%{?dist}
 Summary:    Kernel drivers for the IPU 6 and sensors
 License:    GPLv3
 URL:        https://github.com/intel/ipu6-drivers
@@ -52,6 +52,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Tue Jul 07 2026 Simone Caronni <negativo17@gmail.com> - 0^20260617git0d5ba31-9
+- Do not ship ov02c10/ov02e10 sensors.
+
 * Tue Jul 07 2026 Simone Caronni <negativo17@gmail.com> - 0^20260617git0d5ba31-8
 - Update dkms.conf file, add missing gc5035 module.
 
