@@ -7,14 +7,14 @@
 
 Name:       dkms-%{dkms_name}
 Version:    0^%{date}git%{shortcommit}
-Release:    9%{?dist}
+Release:    10%{?dist}
 Summary:    Kernel drivers for the IPU 6 and sensors
 License:    GPLv3
 URL:        https://github.com/intel/ipu6-drivers
 BuildArch:  noarch
 
 Source0:    %{url}/archive/%{commit}.tar.gz#/ipu6-drivers-%{shortcommit}.tar.gz
-Source2:    %{name}.conf
+Patch0:     ipu6-drivers-kvers.patch
 
 Provides:   %{dkms_name}-kmod = %{version}
 Requires:   dkms
@@ -25,11 +25,7 @@ IPU6 on Intel platforms.
 
 %prep
 %autosetup -p1 -n ipu6-drivers-%{commit}
-# Pre-apply patch listed in dkms.conf:
-patch -p1 -i patches/*.patch
-rm -fr patch* .github
-
-cp -f %{SOURCE2} dkms.conf
+rm -fr .github
 
 %build
 
@@ -52,6 +48,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Tue Jul 07 2026 Simone Caronni <negativo17@gmail.com> - 0^20260617git0d5ba31-10
+- Use patched project's dkms file for proper detection.
+
 * Tue Jul 07 2026 Simone Caronni <negativo17@gmail.com> - 0^20260617git0d5ba31-9
 - Do not ship ov02c10/ov02e10 sensors.
 
