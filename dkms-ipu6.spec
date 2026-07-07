@@ -7,7 +7,7 @@
 
 Name:       dkms-%{dkms_name}
 Version:    0^%{date}git%{shortcommit}
-Release:    10%{?dist}
+Release:    11%{?dist}
 Summary:    Kernel drivers for the IPU 6 and sensors
 License:    GPLv3
 URL:        https://github.com/intel/ipu6-drivers
@@ -26,6 +26,8 @@ IPU6 on Intel platforms.
 %prep
 %autosetup -p1 -n ipu6-drivers-%{commit}
 rm -fr .github
+
+sed -i -e 's/PACKAGE_VERSION=.*/PACKAGE_VERSION=%{version}/g' dkms.conf
 
 %build
 
@@ -48,6 +50,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Tue Jul 07 2026 Simone Caronni <negativo17@gmail.com> - 0^20260617git0d5ba31-11
+- Adjust version in dkms file.
+
 * Tue Jul 07 2026 Simone Caronni <negativo17@gmail.com> - 0^20260617git0d5ba31-10
 - Use patched project's dkms file for proper detection.
 
