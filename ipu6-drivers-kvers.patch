@@ -1,6 +1,6 @@
 diff -Naur ipu6-drivers-0d5ba31069ead844e231ed1ac637ac8ef571d63a.old/dkms.conf ipu6-drivers-0d5ba31069ead844e231ed1ac637ac8ef571d63a/dkms.conf
 --- ipu6-drivers-0d5ba31069ead844e231ed1ac637ac8ef571d63a.old/dkms.conf	2026-06-17 10:26:49.000000000 +0200
-+++ ipu6-drivers-0d5ba31069ead844e231ed1ac637ac8ef571d63a/dkms.conf	2026-07-07 16:12:55.059078650 +0200
++++ ipu6-drivers-0d5ba31069ead844e231ed1ac637ac8ef571d63a/dkms.conf	2026-07-09 10:51:03.722905556 +0200
 @@ -1,9 +1,6 @@
 -PACKAGE_NAME=ipu6-drivers
 -PACKAGE_VERSION=0.0.0
@@ -47,9 +47,20 @@ diff -Naur ipu6-drivers-0d5ba31069ead844e231ed1ac637ac8ef571d63a.old/dkms.conf i
  
  BUILT_MODULE_NAME[4]="hm2170"
  BUILT_MODULE_LOCATION[4]="drivers/media/i2c"
+@@ -64,6 +67,10 @@
+ BUILT_MODULE_LOCATION[5]="drivers/media/i2c"
+ DEST_MODULE_LOCATION[5]="/updates"
+ 
++BUILT_MODULE_NAME[22]="gc5035"
++BUILT_MODULE_LOCATION[22]="drivers/media/i2c"
++DEST_MODULE_LOCATION[22]="/updates"
++
+ if ! version_lt ${KERNEL_VERSION} ${KV_OV05C10}; then
+     BUILD_EXCLUSIVE_CONFIG="CONFIG_VIDEO_V4L2_I2C CONFIG_V4L2_CCI_I2C"
+     BUILT_MODULE_NAME[6]="ov05c10"
 diff -Naur ipu6-drivers-0d5ba31069ead844e231ed1ac637ac8ef571d63a.old/Makefile ipu6-drivers-0d5ba31069ead844e231ed1ac637ac8ef571d63a/Makefile
 --- ipu6-drivers-0d5ba31069ead844e231ed1ac637ac8ef571d63a.old/Makefile	2026-06-17 10:26:49.000000000 +0200
-+++ ipu6-drivers-0d5ba31069ead844e231ed1ac637ac8ef571d63a/Makefile	2026-07-07 16:10:44.771136298 +0200
++++ ipu6-drivers-0d5ba31069ead844e231ed1ac637ac8ef571d63a/Makefile	2026-07-09 10:50:52.343687279 +0200
 @@ -24,6 +24,8 @@
  KV_IPU_BRIDGE := 6.6.0
  KV_OV2740 := 6.8.0
